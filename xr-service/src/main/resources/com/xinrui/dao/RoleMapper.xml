@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinrui.dao.RoleMapper">
+    <sql id="Base_Column_List" >
+        id, role_name, role_code, description, update_time, create_time, state
+    </sql>
+    <resultMap id="BaseResultMap" type="com.xinrui.framework.model.Role">
+        <id column="id" property="id"></id>
+        <result column="role_name" property="roleName"></result>
+        <result column="role_code" property="roleCode"></result>
+        <result column="description" property="description"></result>
+        <result column="update_time" property="updateTime"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="state" property="state"></result>
+    </resultMap>
+    <select id="findRoleOptions" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from xr_role
+        where state != 99
+    </select>
+</mapper>
