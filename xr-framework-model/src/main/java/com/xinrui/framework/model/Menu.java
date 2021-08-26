@@ -17,6 +17,7 @@ import java.util.Date;
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 @ApiModel(value = "菜单对象",description = "菜单对象Menu")
 public class Menu implements Serializable {
+    private static final long serialVersionUID = -5276348770980259529L;
     @Id
     @GeneratedValue(generator = "jpa-uuid")
     @ApiModelProperty("id")

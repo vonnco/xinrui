@@ -2,7 +2,6 @@ package com.xinrui.api;
 
 import com.xinrui.framework.common.model.response.QueryResponseResult;
 import com.xinrui.framework.common.model.response.ResponseResult;
-import com.xinrui.framework.model.SubstationTerminalGather;
 import com.xinrui.framework.model.User;
 import com.xinrui.framework.model.ext.UserExt;
 import com.xinrui.framework.model.request.UserListRequest;

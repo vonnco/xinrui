@@ -18,6 +18,7 @@ import java.util.Date;
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
 @ApiModel(value = "用户对象",description = "用户对象User")
 public class User implements Serializable {
+    private static final long serialVersionUID = 8069618233731429532L;
     @Id
     @GeneratedValue(generator = "jpa-uuid")
     @ApiModelProperty("id")
