@@ -5,7 +5,7 @@ spring:
     name: xr-service
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/xinrui?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
+      url: jdbc:mysql://localhost:3306/xinrui?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
       username: root
       password: 123456
       driverClassName: com.mysql.jdbc.Driver

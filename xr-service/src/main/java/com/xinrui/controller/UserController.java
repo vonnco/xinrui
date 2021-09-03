@@ -1,9 +1,6 @@
 package com.xinrui.controller;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
-import cn.afterturn.easypoi.excel.ExcelImportUtil;
-import cn.afterturn.easypoi.excel.entity.ExportParams;
-import cn.afterturn.easypoi.excel.entity.ImportParams;
+import com.xinrui.aop.OperateLog;
 import com.xinrui.api.UserControllerApi;
 import com.xinrui.framework.common.model.response.QueryResponseResult;
 import com.xinrui.framework.common.model.response.ResponseResult;
@@ -11,18 +8,13 @@ import com.xinrui.framework.model.User;
 import com.xinrui.framework.model.ext.UserExt;
 import com.xinrui.framework.model.request.UserListRequest;
 import com.xinrui.framework.model.response.UploadResult;
-import com.xinrui.framework.utils.ExcelUtil;
 import com.xinrui.service.UserService;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -39,6 +31,7 @@ public class UserController implements UserControllerApi {
 
     @Override
     @PostMapping("/addUser")
+    @OperateLog
     public ResponseResult addUser(User user) {
         return userService.addUser(user);
     }
@@ -62,14 +55,16 @@ public class UserController implements UserControllerApi {
 
     @Override
     @DeleteMapping("/deleteUser")
+    @OperateLog
     public ResponseResult deleteUser(@RequestParam("ids") List<String> ids) {
         return userService.deleteUser(ids);
     }
 
     @Override
     @PutMapping("/editUser")
-    public ResponseResult editUer(@RequestBody User user) {
-        return userService.editUer(user);
+    @OperateLog
+    public ResponseResult editUser(@RequestBody User user) {
+        return userService.editUser(user);
     }
 
     @Override
@@ -80,6 +75,7 @@ public class UserController implements UserControllerApi {
 
     @Override
     @PostMapping("/importUser")
+    @OperateLog
     public UploadResult importUser(MultipartFile file) {
         return userService.importUser(file);
     }

@@ -34,7 +34,7 @@ public interface UserControllerApi {
     public ResponseResult deleteUser(List<String> ids);
 
     @ApiOperation("编辑用户")
-    public ResponseResult editUer(User user);
+    public ResponseResult editUser(User user);
 
     @ApiOperation("导出用户")
     public void exportUser(HttpServletRequest request, HttpServletResponse response);

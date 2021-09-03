@@ -20,4 +20,6 @@ public interface PageControllerApi {
     public String roleList();
     @ApiOperation("菜单列表页面")
     public String menuList();
+    @ApiOperation("操作日志列表页面")
+    public String operationLogList();
 }

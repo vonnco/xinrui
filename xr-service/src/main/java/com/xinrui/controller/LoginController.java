@@ -1,8 +1,6 @@
 package com.xinrui.controller;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.xinrui.client.AuthClient;
-import com.xinrui.framework.common.model.response.Response;
 import com.xinrui.framework.model.ext.UserExt;
 import com.xinrui.framework.model.request.LoginRequest;
 import com.xinrui.framework.model.response.JwtResult;
@@ -12,8 +10,15 @@ import com.xinrui.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -29,9 +34,13 @@ public class LoginController{
         return "/login";
     }
 
-    @HystrixCommand(fallbackMethod = "fallbackLogin")
+    //@HystrixCommand(fallbackMethod = "fallbackLogin")
     @PostMapping("/userlogin")
     public String login(LoginRequest loginRequest, Model model) {
+        //获取request
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //获取session
+        HttpSession session = request.getSession();
         LoginResult loginResult = authClient.login(loginRequest);
         if (loginResult.isSuccess()) {
             model.addAttribute("token",loginResult.getToken());
@@ -43,7 +52,7 @@ public class LoginController{
             Map<String, String> jwtClaimsFromToken = Oauth2Util.getJwtClaimsFromToken(jwtToken);
             //根据用户名查询用户信息
             UserExt userExt = userService.findUserByUsername(jwtClaimsFromToken.get("user_name"));
-            model.addAttribute("userExt",userExt);
+            session.setAttribute("userExt",userExt);
             return "/index";
         } else {
             model.addAttribute("msg",loginResult.getMsg());
@@ -52,14 +61,19 @@ public class LoginController{
     }
 
     //登录报错回调方法
-    public String fallbackLogin(LoginRequest loginRequest, Model model){
+    /*public String fallbackLogin(LoginRequest loginRequest, Model model){
         model.addAttribute("msg","测试Hystrix熔断");
         return "/login";
-    }
+    }*/
 
     @GetMapping("/userlogout")
     public String logout() {
+        //获取request
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //获取session
+        HttpSession session = request.getSession();
         authClient.logout();
+        session.removeAttribute("userExt");
         return "redirect:/login";
     }
 

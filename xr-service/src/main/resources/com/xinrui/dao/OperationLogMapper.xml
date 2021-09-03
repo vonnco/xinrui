@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinrui.dao.OperationLogMapper">
+    <sql id="Base_Column_List">
+        id, operate_class, operate_method, return_class, operate_user, operate_time, param_and_value, cost_time, return_value
+    </sql>
+    <resultMap id="BaseResultMap" type="com.xinrui.framework.model.OperationLog">
+        <id column="id" property="id"></id>
+        <result column="operate_class" property="operateClass"></result>
+        <result column="operate_method" property="operateMethod"></result>
+        <result column="return_class" property="returnClass"></result>
+        <result column="operate_user" property="operateUser"></result>
+        <result column="operate_time" property="operateTime"></result>
+        <result column="param_and_value" property="paramAndValue"></result>
+        <result column="cost_time" property="costTime"></result>
+        <result column="return_value" property="returnValue"></result>
+    </resultMap>
+    <select id="findOperationLogList" resultMap="BaseResultMap">
+        select
+        a.id, a.operate_class, a.operate_method, a.return_class, a.operate_user, a.operate_time, a.param_and_value, a.cost_time, a.return_value
+        from xr_operation_log a,
+        (
+        select id from xr_operation_log
+        <where>
+            1=1
+            <if test="operateUser != null and operateUser != ''">
+                and operate_user = #{operateUser}
+            </if>
+            <if test="operateMethod != null and operateMethod != ''">
+                and operate_method = #{operateMethod}
+            </if>
+            <if test="returnClass != null and returnClass != ''">
+                and return_class = #{returnClass}
+            </if>
+            <if test="costTime != null">
+                and cost_time = #{costTime}
+            </if>
+        </where>
+        ) b where a.id = b.id
+    </select>
+</mapper>

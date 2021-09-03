@@ -48,7 +48,7 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;">
-                        <cite th:text="${userExt.name}"></cite>
+                        <cite th:text="${session.userExt.name}"></cite>
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a lay-href="set/user/info.html">基本资料</a></dd>
@@ -76,13 +76,13 @@
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-                    <li th:if="${#strings.isEmpty(menu.parentId)}" th:each="menu : ${userExt.menuList}" data-name="system" class="layui-nav-item layui-nav-itemed">
+                    <li th:if="${#strings.isEmpty(menu.parentId)}" th:each="menu : ${session.userExt.menuList}" data-name="system" class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:;" lay-tips="系统管理" lay-direction="2">
                             <i class="layui-icon layui-icon-set"></i>
                             <cite th:text="${menu.menuName}"></cite>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd th:class="${menuSub.parentId eq menu.id && menuSub.sort eq 1}?'layui-this':''" th:each="menuSub : ${userExt.menuList}" data-name="console">
+                            <dd th:class="${menuSub.parentId eq menu.id && menuSub.sort eq 1}?'layui-this':''" th:if="${not #strings.isEmpty(menuSub.parentId)}" th:each="menuSub : ${session.userExt.menuList}" data-name="console">
                                 <a th:text="${menuSub.menuName}" th:lay-href="${menuSub.url}"></a>
                             </dd>
                         </dl>

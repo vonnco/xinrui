@@ -6,14 +6,12 @@ import cn.afterturn.easypoi.excel.entity.ExportParams;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.xinrui.dao.UserMapper;
 import com.xinrui.dao.UserRepository;
 import com.xinrui.framework.common.Enum.StateEnum;
 import com.xinrui.framework.common.exception.ExceptionCast;
 import com.xinrui.framework.common.model.response.CommonCode;
 import com.xinrui.framework.common.model.response.QueryResponseResult;
-import com.xinrui.framework.common.model.response.QueryResult;
 import com.xinrui.framework.common.model.response.ResponseResult;
 import com.xinrui.framework.model.User;
 import com.xinrui.framework.model.ext.UserExt;
@@ -124,7 +122,7 @@ public class UserService {
 
     //编辑用户
     @Transactional
-    public ResponseResult editUer(User user) {
+    public ResponseResult editUser(User user) {
         User oldUser = this.findById(user.getId());
         if (!StringUtils.isEmpty(user.getUsername())){
             oldUser.setUsername(user.getUsername());
