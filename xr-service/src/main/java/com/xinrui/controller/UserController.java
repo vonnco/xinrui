@@ -32,13 +32,13 @@ public class UserController implements UserControllerApi {
     @Override
     @PostMapping("/addUser")
     @OperateLog
+    //@PreAuthorize("hasAuthority('sysmanager_user_add')")//当用户拥有了sysmanager_user_add权限时候方可访问此方法
     public ResponseResult addUser(User user) {
         return userService.addUser(user);
     }
 
     @Override
     @GetMapping("/findUserList")
-//    @PreAuthorize("hasAuthority('sysmanager_user_list')")//当用户拥有了course_find_list权限时候方可访问此方法
     public QueryResponseResult findUserList(UserListRequest userListRequest) {
         QueryResponseResult queryResponseResult = userService.findUserList(userListRequest);
         if (queryResponseResult.isSuccess()) {
@@ -61,7 +61,7 @@ public class UserController implements UserControllerApi {
     }
 
     @Override
-    @PutMapping("/editUser")
+    @PutMapping(value = "/editUser")
     @OperateLog
     public ResponseResult editUser(@RequestBody User user) {
         return userService.editUser(user);

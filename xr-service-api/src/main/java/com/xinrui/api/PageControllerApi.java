@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 
 @Api(value = "页面跳转接口",description = "页面跳转接口，提供所有菜单页面的跳转")
 public interface PageControllerApi {
-    @ApiOperation("默认跳转页面")
-    public String home();
+    @ApiOperation("首页")
+    public String index(String username,Model model);
     @ApiOperation("用户列表页面")
     public String userList(Model model);
     @ApiOperation("添加用户页面")

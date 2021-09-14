@@ -16,6 +16,15 @@
         <result column="u_update_time" property="updateTime"></result>
         <result column="u_create_time" property="createTime"></result>
         <result column="u_state" property="state"></result>
+        <collection property="roleList" ofType="com.xinrui.framework.model.Role">
+            <id column="r_id" property="id"></id>
+            <result column="role_name" property="roleName"></result>
+            <result column="role_code" property="roleCode"></result>
+            <result column="description" property="description"></result>
+            <result column="r_update_time" property="updateTime"></result>
+            <result column="r_create_time" property="createTime"></result>
+            <result column="r_state" property="state"></result>
+        </collection>
         <collection property="menuList" ofType="com.xinrui.framework.model.Menu">
             <id column="m_id" property="id"></id>
             <result column="menu_name" property="menuName"></result>
@@ -33,13 +42,14 @@
     <select id="findUserByUsername" resultMap="findUserByUsername">
         select
         a.id as u_id, a.username, a.password, a.name, a.sex, a.tel, a.email, a.update_time as u_update_time, a.create_time as u_create_time, a.state as u_state,
+        c.id as r_id, c.role_name, c.role_code, c.description, c.update_time as r_update_time, c.create_time as r_create_time, c.state as r_state,
         e.id as m_id, e.menu_name, e.menu_code, e.parent_id, e.url, e.is_menu, e.update_time as m_update_time, e.create_time as m_create_time, e.sort, e.state as m_state
         from xr_user a
         left join xr_user_role b on a.id = b.user_id
         left join xr_role c on b.role_id = c.id
         left join xr_role_menu d on c.id = d.role_id
         left join xr_menu e on d.menu_id = e.id
-        where a.username = #{username} and a.state != 99
+        where a.username = #{username} and a.state != 99 and c.state != 99 and e.state != 99
     </select>
     <select id="findUerList" resultType="com.xinrui.framework.model.User" parameterType="com.xinrui.framework.model.request.UserListRequest">
         select

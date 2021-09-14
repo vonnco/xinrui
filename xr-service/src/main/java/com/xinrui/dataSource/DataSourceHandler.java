@@ -1,4 +1,4 @@
-package com.xinrui.dynamicDataSource;
+package com.xinrui.dataSource;
 
 public class DataSourceHandler {
     // 数据源名称

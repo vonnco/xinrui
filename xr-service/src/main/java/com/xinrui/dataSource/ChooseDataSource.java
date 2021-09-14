@@ -1,4 +1,4 @@
-package com.xinrui.dynamicDataSource;
+package com.xinrui.dataSource;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.util.StringUtils;

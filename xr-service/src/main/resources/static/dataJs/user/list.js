@@ -6,8 +6,7 @@ layui.config({
 }).use(['index', 'useradmin', 'table','jwtDecode'], function () {
     var $ = layui.$
         , form = layui.form
-        , table = layui.table
-        , jwtDecode = layui.jwtDecode;
+        , table = layui.table;
 
     //获取jwt令牌
     var jwt = layui.data(layui.setter.tableName)['jwt']
@@ -93,7 +92,7 @@ layui.config({
                 url: "/user/checkPassword",
                 type: "POST",
                 dataType: "json",
-                data:{id:jwtDecodeVal.id,password:value},
+                data:{id:jwtDecodeVal.jti,password:value},
                 headers: {"Authorization": 'Bearer ' + jwt},
                 success: function (res) {
                     layer.msg(res.msg, {time: 2000}, function () {
@@ -178,7 +177,7 @@ layui.config({
                     url: "/user/checkPassword",
                     type: "POST",
                     dataType: "json",
-                    data:{id:jwtDecodeVal.id,password:value},
+                    data:{id:jwtDecodeVal.jti,password:value},
                     headers: {"Authorization": 'Bearer ' + jwt},
                     success: function (res) {
                         layer.msg(res.msg, {time: 2000}, function () {

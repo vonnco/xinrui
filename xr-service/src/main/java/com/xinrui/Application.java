@@ -9,6 +9,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 
 @EnableCircuitBreaker
 @EnableFeignClients
@@ -26,5 +27,11 @@ public class Application {
     @Bean
     public FeignClientInterceptor feignClientInterceptor(){
         return new FeignClientInterceptor();
+    }
+
+    //解决no session
+    @Bean
+    public OpenEntityManagerInViewFilter openEntityManagerInViewFilter() {
+        return new OpenEntityManagerInViewFilter();
     }
 }

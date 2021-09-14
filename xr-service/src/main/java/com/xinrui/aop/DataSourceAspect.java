@@ -1,7 +1,7 @@
 package com.xinrui.aop;
 
-import com.xinrui.dynamicDataSource.ChooseDataSource;
-import com.xinrui.dynamicDataSource.DataSourceHandler;
+import com.xinrui.dataSource.ChooseDataSource;
+import com.xinrui.dataSource.DataSourceHandler;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

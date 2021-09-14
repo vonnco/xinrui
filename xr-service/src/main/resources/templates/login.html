@@ -19,12 +19,11 @@
         <div class="layadmin-user-login-box layadmin-user-login-header">
             <h2>鑫瑞建材后台管理系统</h2>
         </div>
-        <form class="layadmin-user-login-box layadmin-user-login-body layui-form" action="/login/userlogin" method="post">
-            <input type="hidden" id="msg" th:if="${not #strings.isEmpty(msg)}" th:value="${msg}">
+        <form class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username"
                        for="LAY-user-login-username"></label>
-                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名"
+                <input type="text" name="username" id="LAY-user-login-username" placeholder="用户名" lay-verify="required"
                        class="layui-input">
             </div>
             <div class="layui-form-item">

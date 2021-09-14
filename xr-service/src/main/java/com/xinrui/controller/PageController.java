@@ -3,25 +3,46 @@ package com.xinrui.controller;
 import com.xinrui.Enum.UserSexEnum;
 import com.xinrui.api.PageControllerApi;
 import com.xinrui.framework.common.Enum.StateEnum;
+import com.xinrui.framework.model.Menu;
 import com.xinrui.framework.model.User;
+import com.xinrui.framework.model.ext.UserExt;
 import com.xinrui.framework.utils.EnumUtil;
 import com.xinrui.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class PageController implements PageControllerApi {
     @Autowired
     private UserService userService;
+
     @Override
-    @GetMapping("/")
-    public String home(){
-        return "redirect:/login";
+    @GetMapping("/index")
+    public String index(String username,Model model){
+        //获取request
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //获取session
+        HttpSession session = request.getSession();
+        session.removeAttribute("userExt");
+        UserExt userExt = userService.findUserByUsername(username);
+        model.addAttribute("name",userExt.getName());
+        List<Menu> menuList = userExt.getMenuList();
+        model.addAttribute("menuList",menuList);
+        List<String> menuCodeList = menuList.stream().map(Menu::getMenuCode).collect(Collectors.toList());
+        session.setAttribute("menuCodeList",menuCodeList);
+        return "index";
     }
+
     @Override
     @GetMapping("/page/user/list")
     public String userList(Model model){

@@ -2,7 +2,7 @@ package com.xinrui.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.xinrui.Enum.DataSourceEnum;
-import com.xinrui.dynamicDataSource.ChooseDataSource;
+import com.xinrui.dataSource.ChooseDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;

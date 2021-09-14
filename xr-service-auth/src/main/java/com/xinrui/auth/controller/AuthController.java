@@ -100,16 +100,6 @@ public class AuthController implements AuthControllerApi {
         return new JwtResult(CommonCode.SUCCESS,authToken.getJwt_token());
     }
 
-    private String getTokenFormCookie() {
-        //获取request
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Map<String, String> cookieMap = CookieUtil.readCookie(request, "uid");
-        if (cookieMap != null && cookieMap.get("uid") != null) {
-            return cookieMap.get("uid");
-        }
-        return null;
-    }
-
     @Override
     @GetMapping("/getUserjwtByToken")
     public JwtResult getUserJwtByToken(@RequestParam String token){
@@ -119,5 +109,15 @@ public class AuthController implements AuthControllerApi {
             return new JwtResult(CommonCode.FAIL,null);
         }
         return new JwtResult(CommonCode.SUCCESS,authToken.getJwt_token());
+    }
+
+    private String getTokenFormCookie() {
+        //获取request
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Map<String, String> cookieMap = CookieUtil.readCookie(request, "uid");
+        if (cookieMap != null && cookieMap.get("uid") != null) {
+            return cookieMap.get("uid");
+        }
+        return null;
     }
 }

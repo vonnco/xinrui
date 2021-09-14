@@ -23,8 +23,8 @@ import java.util.Date;
 
 @Component
 @Aspect
-public class OperateAdvice {
-    private static Logger log = LoggerFactory.getLogger(OperateAdvice.class);
+public class OperateAspect {
+    private static Logger log = LoggerFactory.getLogger(OperateAspect.class);
     @Autowired
     private OperationLogService operationLogService;
     @Around("execution(* com.xinrui.controller.*.*(..)) && @annotation(operateLog)")

@@ -50,3 +50,6 @@ eureka:
 logging: # 配置日志级别
   level:
     com.xinrui.dao: debug
+jwt:
+  key: vonco
+  ttl: 2000

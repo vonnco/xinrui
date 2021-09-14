@@ -1,3 +1,4 @@
+/*
 package com.xinrui.config;
 
 import org.springframework.context.annotation.Bean;
@@ -38,11 +39,13 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
         return converter;
     }
 
-    /**
+    */
+/**
      * 获取非对称加密公钥 Key
      *
      * @return 公钥 Key
-     */
+     *//*
+
     private String getPubKey() {
         Resource resource = new ClassPathResource(PUBLIC_KEY);
         try {
@@ -72,4 +75,4 @@ public class ResourceServerConfig  extends ResourceServerConfigurerAdapter {
                 .formLogin()
                         .loginPage("/login");
     }
-}
+}*/

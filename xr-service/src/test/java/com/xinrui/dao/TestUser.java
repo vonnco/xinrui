@@ -15,7 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @SpringBootTest
@@ -61,15 +63,25 @@ public class TestUser {
     }
 
     @Test
-    public void test(){
-        String s = new String("abc");
-        try {
-            Field value = s.getClass().getDeclaredField("value");
-            value.setAccessible(true);
-            value.set(s,"abcd");
-            System.out.println(s);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    public void test() throws ParseException {
+
+        String[] times = "2021-10".split("-");
+        String year = times[0];
+        String month = times[1];
+
+        Calendar cal = Calendar.getInstance();
+        //设置年份
+        cal.set(Calendar.YEAR,Integer.parseInt(year) );
+        //设置月份
+        cal.set(Calendar.MONTH,Integer.parseInt(month)-1);
+        //设置日期
+        cal.set(Calendar.DATE, 1);
+        //获取某月最大天数
+        int lastDay = cal.getActualMaximum(Calendar.DATE);
+        //设置日历中月份的最大天数
+        cal.set(Calendar.DAY_OF_MONTH, lastDay);
+        //格式化日期
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String format = sdf.format(cal.getTime());
     }
 }

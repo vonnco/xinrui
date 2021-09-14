@@ -66,7 +66,7 @@
 
         <div class="layui-card-body">
             <div style="padding-bottom: 10px;">
-                <button class="layui-btn layuiadmin-btn-admin" data-type="batchdel">删除</button>
+                <button th:if="${#lists.contains(session.menuCodeList, 'sysmanager_user_batchdel')}" class="layui-btn layuiadmin-btn-admin" data-type="batchdel">删除</button>
                 <button class="layui-btn layuiadmin-btn-admin" data-type="add">添加</button>
                 <button class="layui-btn layuiadmin-btn-admin" data-type="import">导入</button>
                 <button class="layui-btn layuiadmin-btn-admin" data-type="export">导出</button>
