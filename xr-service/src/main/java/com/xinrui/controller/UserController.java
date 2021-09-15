@@ -39,6 +39,7 @@ public class UserController implements UserControllerApi {
 
     @Override
     @GetMapping("/findUserList")
+    //@RequiresPermissions("sysmanager_user_findUserList")//当用户拥有了sysmanager_user_add权限时候方可访问此方法
     public QueryResponseResult findUserList(UserListRequest userListRequest) {
         QueryResponseResult queryResponseResult = userService.findUserList(userListRequest);
         if (queryResponseResult.isSuccess()) {
